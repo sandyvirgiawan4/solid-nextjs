@@ -14,7 +14,6 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Mengurangi telemetri Next.js dengan format sintaks baru (key=value)
 ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN npm run build
@@ -23,16 +22,8 @@ RUN npm run build
 FROM docker.io/library/node:20-alpine AS runner
 WORKDIR /app
 
-# Stage 3: Runner (Production)
-FROM node:18-alpine AS runner
-WORKDIR /app
-
-# 👇 TAMBAHKAN LINE INI UNTUK MENGINTAL CURL
+# Menginstal curl agar Healthcheck Coolify berfungsi
 RUN apk add --no-cache curl
-
-ENV NODE_ENV production
-ENV NEXT_TEMETRY_DISABLED 1
-...
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
