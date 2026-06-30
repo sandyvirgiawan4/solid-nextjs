@@ -2,6 +2,7 @@
 
 const nextConfig = {
   reactStrictMode: true,
+  output: 'standalone', // 👈 TAMBAHKAN BARIS INI
   images: {
     remotePatterns: [
       {
